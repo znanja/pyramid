@@ -876,11 +876,11 @@ Glossary
      on the Jinja2 templating system.
 
    Akhet
-     `Akhet <http://docs.pylonsproject.org/projects/akhet/en/latest/>`_ is a 
+     `Akhet <http://docs.pylonsproject.org/projects/akhet/en/latest/>`_ is a
      Pyramid library and demo application with a Pylons-like feel.
-     It's most known for its former application scaffold, which helped 
+     It's most known for its former application scaffold, which helped
      users transition from Pylons and those prefering a more Pylons-like API.
-     The scaffold has been retired but the demo plays a similar role. 
+     The scaffold has been retired but the demo plays a similar role.
 
    Pyramid Cookbook
      An additional documentation resource for Pyramid which presents topical,
