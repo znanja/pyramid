@@ -95,7 +95,7 @@ def main():
         debug('not overwriting %s' % manifest)
     else:
         here = os.getcwd() # always root dir of project
-        new = '\n'.join(list_git_files(here))
+        new = '\n'.join(list_git_files(here)) + '\n'
         mf = os.path.join(here, manifest)
         try:
             mfp = open(mf, 'r')
