@@ -1,6 +1,13 @@
 Next release
 ============
 
+Features
+--------
+
+- Add a MANIFEST to the Pyramid checkout (automatically maintained via a new
+  ``manifestgen.py`` script added to the root of Pyramid and some
+  accompanying git hooks).
+
 Bug Fixes
 ---------
 
