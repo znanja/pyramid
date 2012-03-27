@@ -104,7 +104,6 @@ def main():
         except IOError:
             old = ''
         old = '\n'.join(old.split('\n')[1:])
-        debug(old)
         if old == new:
             debug('manifest NOT changed, NOT overwriting %s' % manifest)
         else:
