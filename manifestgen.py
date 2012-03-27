@@ -21,8 +21,9 @@ this:
     * filter=manifestgen
 
 Whenever you use ``git add`` in the project, the MANIFEST.in file at the
-project root will be regenerated.  This will happen for each and every file
-added *except* MANIFEST.in itself.
+project root will be regenerated (and will include the file you've just
+added).  This will happen for each and every file added *except* MANIFEST.in
+itself.
 
 The generated MANIFEST.in will have a comment at the top of it with the epoch
 time it was generated.
@@ -94,15 +95,24 @@ def main():
     if marker_re.match(firstline): # dont overwrite manifest when adding it
         debug('not overwriting %s' % manifest)
     else:
-        debug('overwriting %s' % manifest)
         here = os.getcwd() # always root dir of project
-        filenames = list_git_files(here)
+        new = '\n'.join(list_git_files(here))
         mf = os.path.join(here, manifest)
-        mfp = open(mf, 'w')
-        now = time.time()
-        mfp.write(marker % int(now))
-        for name in filenames:
-            mfp.write(name +'\n')
+        try:
+            mfp = open(mf, 'r')
+            old = mfp.read()
+        except IOError:
+            old = ''
+        old = '\n'.join(old.split('\n')[1:])
+        debug(old)
+        if old == new:
+            debug('manifest NOT changed, NOT overwriting %s' % manifest)
+        else:
+            debug('manifest changed, overwriting %s' % manifest)
+            mfp = open(mf, 'w')
+            now = time.time()
+            mfp.write(marker % int(now))
+            mfp.write(new)
         mfp.close()
 
 if __name__ == '__main__':
