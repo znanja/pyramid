@@ -21,6 +21,7 @@ import textwrap
 import threading
 import time
 import traceback
+import warnings
 
 from paste.deploy import loadapp, loadserver
 
@@ -142,6 +143,20 @@ class PServeCommand(object):
         action='store_true',
         help=('Stop a daemonized server (given a PID file, or default '
               'pyramid.pid file)'))
+    parser.add_option(
+        '-W', '--warnfilter',
+        dest='warnfilter',
+        metavar="ACTION",
+        default='default',
+        choices=('ignore', 'error', 'always', 'default', 'module', 'once'),
+        help=('Set a Python warnings filter action (default: ``default``). '
+              'See the Python warnings module docs for definitions of the '
+              'available choices.  Ex: -Wignore.  This option '
+              'will have no effect if the any PYTHONWARNINGS envvar '
+              'is set in your environment, or one or more -W options '
+              'to *Python* are provided.  Python warnoptions settings override '
+              'this option.')
+        )
 
     _scheme_re = re.compile(r'^[a-z][a-z]+:', re.I)
 
@@ -161,6 +176,8 @@ class PServeCommand(object):
             print(msg)
 
     def run(self): # pragma: no cover
+        if not sys.warnoptions:
+            warnings.simplefilter(self.options.warnfilter)
         if self.options.stop_daemon:
             return self.stop_daemon()
 
