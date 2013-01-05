@@ -133,10 +133,8 @@ if 'sphinx-build' in ' '.join(sys.argv): # protect against dumb importers
     from subprocess import call, Popen, PIPE
 
     p = Popen('which git', shell=True, stdout=PIPE)
-
     cwd = os.getcwd()
     _themes = os.path.join(cwd, '_themes')
-    p = Popen('which git', shell=True, stdout=PIPE)
     git = p.stdout.read().strip()
     if not os.listdir(_themes):
         call([git, 'submodule', '--init'])
