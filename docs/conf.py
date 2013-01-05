@@ -48,6 +48,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
     'repoze.sphinx.autointerface',
+    'sphinx.ext.viewcode',
 #    'sphinx.ext.intersphinx'
     ]
 
@@ -131,6 +132,8 @@ if book:
 if 'sphinx-build' in ' '.join(sys.argv): # protect against dumb importers
     from subprocess import call, Popen, PIPE
 
+    p = Popen('which git', shell=True, stdout=PIPE)
+
     cwd = os.getcwd()
     _themes = os.path.join(cwd, '_themes')
     p = Popen('which git', shell=True, stdout=PIPE)
@@ -157,7 +160,7 @@ html_theme_path = ['_themes']
 html_theme = 'pyramid'
 html_theme_options = dict(
     github_url='https://github.com/Pylons/pyramid',
-#    in_progress='true'
+#    in_progress='true',
     )
 # The style sheet to use for HTML and HTML Help pages. A file of that name
 # must exist either in Sphinx' static/ path, or in one of the custom paths
@@ -231,6 +234,8 @@ latex_paper_size = 'letter'
 
 # The font size ('10pt', '11pt' or '12pt').
 latex_font_size = '10pt'
+
+latex_additional_files = ['_static/latex-note.png', '_static/latex-warning.png']
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
