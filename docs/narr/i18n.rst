@@ -319,7 +319,7 @@ application's ``setup.py`` file:
                 'Babel',
                 'lingua',
                 ],
-          message_extractors = { '.': [
+          message_extractors = { 'mypackage': [
                 ('**.py',   'lingua_python', None ),
                 ('**.pt',   'lingua_xml', None ),
                 ]},
