@@ -1128,7 +1128,7 @@ class BasicAuthAuthenticationPolicy(CallbackAuthenticationPolicy):
         if authmeth.lower() != 'basic':
             return None
         try:
-            auth = b64decode(auth.strip()).decode('ascii')
+            auth = b64decode(auth.strip()).decode('utf-8')
         except (TypeError, binascii.Error): # can't decode
             return None
         try:
