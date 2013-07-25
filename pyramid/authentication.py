@@ -851,15 +851,20 @@ class AuthTktCookieHelper(object):
         if ':' in cur_domain:
             cur_domain = cur_domain.split(':', 1)[0]
 
-        cookies = [
-            ('Set-Cookie', '%s="%s"; Path=%s%s%s' % (
-            self.cookie_name, value, self.path, max_age, self.static_flags))
-            ]
-
+        cookies = []
         domains = []
-        if self.parent_domain and cur_domain.count('.') > 1:
-            domains.append('.' + cur_domain.split('.', 1)[1])
+
+        if self.parent_domain:
+            if cur_domain.count('.') > 1:
+                domains.append('.' + cur_domain.split('.', 1)[1])
+            else:
+                domains.append('.' + cur_domain)
         else:
+            cookies.append(
+                ('Set-Cookie', '%s="%s"; Path=%s%s%s' % (
+                self.cookie_name, value, self.path, max_age, self.static_flags))
+                )
+
             domains.append(cur_domain)
             if self.wild_domain:
                 domains.append('.' + cur_domain)
