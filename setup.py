@@ -68,7 +68,7 @@ testing_extras = tests_require + [
     ]
 
 setup(name='pyramid',
-      version='z1.4.3.2',
+      version='z1.4.3.3',
       description=('The Pyramid web application development framework, a '
                    'Pylons project'),
       long_description=README + '\n\n' +  CHANGES,
