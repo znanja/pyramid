@@ -4,6 +4,10 @@ Next Release
 Features
 --------
 
+- Add ``pdistreport`` script, which prints the Python version in use, the
+  Pyramid version in use, and the version number and location of all Python
+  distributions currently installed.
+
 - Add the ability to invert the result of any view, route, or subscriber
   predicate using the ``not_`` class.  For example::
 
@@ -117,6 +121,15 @@ Features
   https://github.com/Pylons/pyramid/pull/1004 and
   https://github.com/Pylons/pyramid/pull/1046
 
+- The ``pserve`` command now takes a ``-v`` (or ``--verbose``) flag and a
+  ``-q`` (or ``--quiet``) flag.  Output from running ``pserve`` can be
+  controlled using these flags.  ``-v`` can be specified multiple times to
+  increase verbosity.  ``-q`` sets verbosity to ``0`` unconditionally.  The
+  default verbosity level is ``1``.
+
+- The ``alchemy`` scaffold tests now provide better coverage.  See
+  https://github.com/Pylons/pyramid/pull/1029
+
 Bug Fixes
 ---------
 
@@ -151,6 +164,9 @@ Bug Fixes
   Python 3 would use ``__len__`` to find truthiness; this usually caused an
   instance of DummyResource to be "falsy" instead of "truthy".  See
   https://github.com/Pylons/pyramid/pull/1032
+
+- The ``alchemy`` scaffold would break when the database was MySQL during
+  tables creation.  See https://github.com/Pylons/pyramid/pull/1049
 
 1.4 (2012-12-18)
 ================
